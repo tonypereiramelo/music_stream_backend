@@ -3,25 +3,25 @@ from app.database import database, music_collection
 
 async def test_connection():
     try:
-        # Verifica se consegue listar as coleções do banco
+        # Check if it is possible to list the collections in the database
         collections = await database.list_collection_names()
-        print(f"Conectado ao MongoDB! Coleções disponíveis: {collections}")
+        print(f"Connected to MongoDB! Available collections: {collections}")
 
-        # Teste de inserção e leitura
+        # Test insertion and retrieval
         test_doc = {"title": "Test Song", "artist": "Test Artist"}
         result = await music_collection.insert_one(test_doc)
-        print(f"Documento inserido com ID: {result.inserted_id}")
+        print(f"Document inserted with ID: {result.inserted_id}")
 
-        # Verifica se a inserção funcionou
+        # Check if the insertion worked
         found_doc = await music_collection.find_one({"_id": result.inserted_id})
-        print("Documento encontrado no banco:", found_doc)
+        print("Document found in the database:", found_doc)
 
-        # Limpeza: remover o documento de teste
+        # Cleanup: remove the test document
         await music_collection.delete_one({"_id": result.inserted_id})
-        print("Teste concluído e documento removido.")
+        print("Test completed and document removed.")
 
     except Exception as e:
-        print(f"Erro ao conectar ao MongoDB: {e}")
+        print(f"Error connecting to MongoDB: {e}")
 
-# Rodar o teste
+# Run the test
 asyncio.run(test_connection())

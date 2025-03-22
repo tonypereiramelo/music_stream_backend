@@ -8,6 +8,7 @@ class Music(BaseModel):
     genre: Optional[str] = Field(None, example="Pop")  # Genre of the song (optional)
     audio_url: str = Field(..., example="http://example.com/audio.mp3")  # URL for the audio file
     duration: Optional[int] = Field(None, example=180)  # Duration in seconds (optional)
+    album: Optional[str] = Field(None, example="Album Name") # Album of the song
 
     class Config:
         # Allow population of models from MongoDB data (fields like _id)

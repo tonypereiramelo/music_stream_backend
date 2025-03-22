@@ -7,7 +7,7 @@ router = APIRouter()
 # Route to add a new music
 @router.post("/", response_model=MusicInDB)
 async def add_music(music: Music):
-    music_in_db = await insert_music(MusicInDB(**music.dict()))
+    music_in_db = await insert_music(MusicInDB(**music.model_dump()))
     return music_in_db
 
 # Route to get a music by ID

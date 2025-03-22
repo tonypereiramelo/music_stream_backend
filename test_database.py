@@ -1,5 +1,5 @@
 import asyncio
-from app.api.database import database, music_collection
+from app.database import database, music_collection
 
 async def test_connection():
     try:
